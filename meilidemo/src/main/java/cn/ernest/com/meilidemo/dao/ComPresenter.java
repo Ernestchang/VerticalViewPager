@@ -30,7 +30,6 @@ public class ComPresenter {
         map.put("st", "1493346274");
         map.put("_did", "7dc5be862ef032e54714ebc1d03a");
         return model.getMeiShow(map).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
-//        return model.getMeiShow2("20", "905", "Naltx", "720*1232", "214208402632814", "17%3A0E%3A76%3AC3%3AF6%3A70", "1493346274", "7dc5be862ef032e54714ebc1d03a").observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
     }
 
 

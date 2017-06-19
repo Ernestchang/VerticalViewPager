@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.hanks.htextview.fade.FadeTextView;
-import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,12 +54,11 @@ public class ViewInner extends FrameLayout {
     @BindView(R.id.toolbarpanel)
     LinearLayout toolbarpanel;
 
-    //    public MeiShowBean.DataBean mData = new MeiShowBean.DataBean();
-    public MeiShowBean.DataBean mData;
-    //    private MainActivity mainActivity;
     public RequestManager mImageLoader;
 
     private Context mContext;
+    public String desc;
+
 
     public ViewInner(@NonNull Context context) {
         super(context);
@@ -86,26 +84,35 @@ public class ViewInner extends FrameLayout {
         addView(mRootView);
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        animateDesc();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        msg.setText("");
+
+    }
+
+    public void animateDesc() {
+        msg.animateText(desc);
+    }
 
     public void refreshData(MeiShowBean.DataBean dataBean) {
 
-        Logger.e("dataBean:" + dataBean.toString());
-        mData = dataBean;
         if (dailyItemBg != null) {
             ImageUtil.load(getImageLoader(), dataBean.img_o, dailyItemBg);
             selfDate.setText(dataBean.date);
             week.setText(dataBean.week);
             selfInfo.setText(dataBean.label);
 //            msg.animateText(dataBean.description);
+            desc = dataBean.description;
         }
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        msg.animateText(mData.description);
-
-    }
 
     public synchronized RequestManager getImageLoader() {
         if (mImageLoader == null)

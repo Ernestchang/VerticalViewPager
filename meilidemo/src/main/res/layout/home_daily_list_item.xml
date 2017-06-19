@@ -80,7 +80,7 @@
                 android:gravity="left"
                 android:letterSpacing="0.08"
                 android:lineSpacingMultiplier="1.2"
-                android:text="This is FadeTextView"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="15.0sp"
                 app:animationDuration="2000" />

@@ -1,7 +1,7 @@
 package cn.ernest.com.meilidemo;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView backBtn;
 
     public RequestManager mImageLoader;
-    private List<Fragment> mFragments;
-
     private ArrayList<MeiShowBean.DataBean> mDatas;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,27 @@ public class MainActivity extends AppCompatActivity {
     private void processData(List<MeiShowBean.DataBean> data) {
         mDatas = new ArrayList<>();
         mDatas.addAll(data);
-        viewPager.setAdapter(new ContentFragmentAdapter(viewPager));
+        final ContentFragmentAdapter adapter = new ContentFragmentAdapter(viewPager);
+        viewPager.setAdapter(adapter);
         viewPager.setHintView(null);
+
+        viewPager.getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ViewInner currentView = ((ViewInner) adapter.findViewByPosition(position));
+                currentView.animateDesc();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         //If you setting other scroll mode, the scrolled fade is shown from either side of display.
 //        viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -75,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(ViewGroup container, int position) {
-            ViewInner view = new ViewInner(MainActivity.this);
-            view.refreshData(mDatas.get(position));
-            return view;
+            ViewInner inner = new ViewInner(MainActivity.this);
+            inner.refreshData(mDatas.get(position));
+            return inner;
         }
 
         @Override

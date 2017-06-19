@@ -91,48 +91,6 @@ public class MeiShowBean {
                     '}';
         }
 
-        /**
-         * "is_like": false,
-         * "water_img_width_ios": 145,
-         * "label": "From:佚名",
-         * "reply_num": 0,
-         * "date": "2017.05.08",
-         * "url": "undefined",
-         * "id": 731,
-         * "img_o": "http://s2.mogucdn.com/p2/170503/1234567890_8ce6e1370h1lgi913i7c9hhikgia0_750x1334.png",
-         * "description": "每一种选择都有不同的结局，就如走不同的路就会有不同的风景。所以，如果想看灿烂的风景，不妨沉思片刻再做选择。",
-         * "water_img_height_ios": 26,
-         * "user_id": 4399967,
-         * "festival": "",
-         * "like_num": 68,
-         * "water_img_height": 39,
-         * "water_img_width": 218,
-         * "water_img_ios": "http://d05.res.meilishuo.net/img/_o/9b/ed/b36468b52c1f588400064ca4debf_145_26.c5.png",
-         * "week": "MON"
-         */
-        public DataBean() {
-//            this.water_img = water_img;
-//            this.img_b = img_b;
-//            this.img_a = img_a;
-//            this.water_img_width_ios = water_img_width_ios;
-            this.is_like = false;
-            this.label = "From:佚名";
-            this.reply_num = 0;
-            this.date = "2017.05.08";
-            this.url = "undefined";
-            this.id = 731;
-            this.img_o = "http://s2.mogucdn.com/p2/170503/1234567890_8ce6e1370h1lgi913i7c9hhikgia0_750x1334.png";
-            this.description = "每一种选择都有不同的结局，就如走不同的路就会有不同的风景。所以，如果想看灿烂的风景，不妨沉思片刻再做选择。";
-            this.water_img_height_ios = 145;
-            this.user_id = 4399967;
-            this.festival = "";
-            this.like_num = 68;
-            this.water_img_height = 39;
-            this.water_img_width = 218;
-            this.water_img_ios = "http://d05.res.meilishuo.net/img/_o/9b/ed/b36468b52c1f588400064ca4debf_145_26.c5.png";
-            this.week = "MON";
-        }
+
     }
-
-
 }

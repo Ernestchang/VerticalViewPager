@@ -417,7 +417,7 @@ public class RollVerticalPagerView extends RelativeLayout implements OnPageChang
 
 	@Override
 	public void onPageSelected(int arg0) {
-        mHintViewDelegate.setCurrentPosition(arg0, (HintView) mHintView);
+		mHintViewDelegate.setCurrentPosition(arg0, (HintView) mHintView);
 	}
 
 }

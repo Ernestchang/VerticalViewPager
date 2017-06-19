@@ -14,22 +14,23 @@ import java.util.ArrayList;
 /**
  * Created by Mr.Jude on 2016/1/9.
  */
-public abstract class LoopVerticalPagerAdapter extends PagerAdapter{
+public abstract class LoopVerticalPagerAdapter extends PagerAdapter {
     private RollVerticalPagerView mViewPager;
 
     private ArrayList<View> mViewList = new ArrayList<>();
 
-    private class LoopHintViewDelegate implements RollVerticalPagerView.HintViewDelegate{
+
+    private class LoopHintViewDelegate implements RollVerticalPagerView.HintViewDelegate {
         @Override
         public void setCurrentPosition(int position, HintView hintView) {
-            if (hintView!=null&&getRealCount()>0)
-                hintView.setCurrent(position%getRealCount());
+            if (hintView != null && getRealCount() > 0)
+                hintView.setCurrent(position % getRealCount());
         }
 
         @Override
         public void initView(int length, int gravity, HintView hintView) {
-            if (hintView!=null)
-                hintView.initView(getRealCount(),gravity);
+            if (hintView != null)
+                hintView.initView(getRealCount(), gravity);
         }
     }
 
@@ -51,19 +52,19 @@ public abstract class LoopVerticalPagerAdapter extends PagerAdapter{
         initPosition();
     }
 
-    private void initPosition(){
-        if (mViewPager.getViewPager().getCurrentItem() == 0&&getRealCount()>0){
-            int half = Integer.MAX_VALUE/2;
-            int start = half - half%getRealCount();
+    private void initPosition() {
+        if (mViewPager.getViewPager().getCurrentItem() == 0 && getRealCount() > 0) {
+            int half = Integer.MAX_VALUE / 2;
+            int start = half - half % getRealCount();
             setCurrent(start);
         }
     }
 
-    private void setCurrent(int index){
+    private void setCurrent(int index) {
         try {
             Field field = ViewPager.class.getDeclaredField("mCurItem");
             field.setAccessible(true);
-            field.set(mViewPager.getViewPager(),index);
+            field.set(mViewPager.getViewPager(), index);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -71,14 +72,14 @@ public abstract class LoopVerticalPagerAdapter extends PagerAdapter{
         }
     }
 
-    public LoopVerticalPagerAdapter(RollVerticalPagerView viewPager){
+    public LoopVerticalPagerAdapter(RollVerticalPagerView viewPager) {
         this.mViewPager = viewPager;
         viewPager.setHintViewDelegate(new LoopHintViewDelegate());
     }
 
     @Override
     public boolean isViewFromObject(View arg0, Object arg1) {
-        return arg0==arg1;
+        return arg0 == arg1;
     }
 
     @Override
@@ -88,31 +89,37 @@ public abstract class LoopVerticalPagerAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        int realPosition = position%getRealCount();
-        View itemView = findViewByPosition(container,realPosition);
+        int realPosition = position % getRealCount();
+        View itemView = findViewByPosition(container, realPosition);
         container.addView(itemView);
         return itemView;
     }
 
 
-    private View findViewByPosition(ViewGroup container,int position){
+    public View findViewByPosition(ViewGroup container, int position) {
         for (View view : mViewList) {
-            if (((int)view.getTag()) == position&&view.getParent()==null){
+            if (((int) view.getTag()) == position && view.getParent() == null) {
                 return view;
             }
         }
-        View view = getView(container,position);
+        View view = getView(container, position);
         view.setTag(position);
         mViewList.add(view);
         return view;
     }
+
+    public View findViewByPosition(int position) {
+        int realPosition = position % getRealCount();
+        return findViewByPosition(null, realPosition);
+    }
+
 
     public abstract View getView(ViewGroup container, int position);
 
     @Deprecated
     @Override
     public final int getCount() {
-        return getRealCount()<=0?getRealCount():Integer.MAX_VALUE;
+        return getRealCount() <= 0 ? getRealCount() : Integer.MAX_VALUE;
     }
 
     public abstract int getRealCount();
